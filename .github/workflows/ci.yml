@@ -24,5 +24,5 @@ jobs:
       - name: Verify wheel installs without server
         run: |
           uv venv .venv-wheel --python ${{ matrix.python }}
-          uv pip install --python .venv-wheel/bin/python dist/musubi_sdk-0.1.0-py3-none-any.whl
-          .venv-wheel/bin/python -c 'import importlib.util as u; import musubi_sdk; from musubi_sdk import AsyncMusubiClient; assert u.find_spec("musubi") is None'
+          uv pip install --python .venv-wheel/bin/python dist/*.whl
+          .venv-wheel/bin/python -c 'import importlib.util as u; import musubi_sdk, musubi_sdk.async_client, musubi_sdk.client, musubi_sdk.exceptions, musubi_sdk.result, musubi_sdk.retry, musubi_sdk.testing, musubi_sdk.tracing; assert u.find_spec("musubi") is None'
