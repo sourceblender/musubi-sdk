@@ -17,6 +17,7 @@ The initial source was extracted from `sourceblender/musubi`'s `src/musubi/sdk` 
 uv sync --locked --group dev --python 3.12
 uv run --python 3.12 pytest -q
 uv run --python 3.12 ruff check src tests
+uv run --python 3.12 ruff format --check src tests
 uv run --python 3.12 mypy src/musubi_sdk
 uv build --wheel
 ```
