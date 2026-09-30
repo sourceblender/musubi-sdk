@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      matrix:
+        python: ['3.12', '3.13']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@v8.1.0
+      - run: uv sync --locked --group dev --python ${{ matrix.python }}
+      - run: uv run --python ${{ matrix.python }} pytest -q
+      - run: uv run --python ${{ matrix.python }} ruff check src tests
+      - run: uv run --python ${{ matrix.python }} mypy src/musubi_sdk
+      - run: uv build --wheel
