@@ -23,3 +23,11 @@ uv build --wheel
 ```
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+## Release
+
+The `publish.yml` workflow builds and smoke-tests a version tag, then publishes
+through PyPI Trusted Publishing from the GitHub `pypi` environment. The PyPI
+publisher must name owner `sourceblender`, repository `musubi-sdk`, workflow
+`publish.yml`, and environment `pypi`. A tag must match `pyproject.toml`'s
+version, for example `v0.1.0` for version `0.1.0`.
